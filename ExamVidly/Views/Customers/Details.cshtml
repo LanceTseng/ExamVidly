@@ -11,6 +11,6 @@
 	<li>MembershipType: @Model.MembershipType.Name</li>
 	@if (!Model.BirthDate.ToString().IsNullOrWhiteSpace())
 	{
-		<li>BirthDate: @Model.BirthDate</li>
+		<li>BirthDate: @Model.BirthDate.Value.ToShortDateString()</li>
 	}
 </ul>
