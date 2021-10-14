@@ -12,9 +12,21 @@ namespace ExamVidly.Controllers
 {
     public class CustomersController : Controller
     {
+        private ApplicationDbContext _context;
+
+        public CustomersController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
         public ActionResult Index()
         {
-            var customers = GetCustomers();
+            var customers = _context.Customers.ToList();
 
             return View(customers);
         }
@@ -23,21 +35,12 @@ namespace ExamVidly.Controllers
         public ActionResult Details(int Id)
         {
 
-            var customer = GetCustomers().FirstOrDefault(m => m.Id == Id);
+            var customer = _context.Customers.FirstOrDefault(m => m.Id == Id);
 
             if (customer == null)
                 return HttpNotFound();
 
             return View(customer);
-        }
-
-        private IEnumerable<Customer> GetCustomers()
-        {
-            return new List<Customer>()
-            {
-                new Customer() {Id = 1, Name = "John Smith" },
-                new Customer() {Id = 2, Name = "Mary Williams" }
-            };
         }
 
     }
