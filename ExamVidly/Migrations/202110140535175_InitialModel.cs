@@ -15,7 +15,7 @@ namespace ExamVidly.Migrations
                         Name = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
-
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
