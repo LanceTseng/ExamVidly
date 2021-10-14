@@ -1,7 +1,16 @@
-﻿@model ExamVidly.Models.Customer
+﻿@using Microsoft.Ajax.Utilities
+@model ExamVidly.Models.Customer
 @{
 	ViewBag.Title = "Details";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>@Model.Name</h2>
+
+<ul>
+	<li>MembershipType: @Model.MembershipType.Name</li>
+	@if (!Model.BirthDate.ToString().IsNullOrWhiteSpace())
+	{
+		<li>BirthDate: @Model.BirthDate</li>
+	}
+</ul>
