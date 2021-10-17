@@ -227,6 +227,10 @@
     <Compile Include="Migrations\202110170222539_populateGenre.Designer.cs">
       <DependentUpon>202110170222539_populateGenre.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110170231077_AddGerneIdToMovie.cs" />
+    <Compile Include="Migrations\202110170231077_AddGerneIdToMovie.Designer.cs">
+      <DependentUpon>202110170231077_AddGerneIdToMovie.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -357,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202110170222539_populateGenre.resx">
       <DependentUpon>202110170222539_populateGenre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110170231077_AddGerneIdToMovie.resx">
+      <DependentUpon>202110170231077_AddGerneIdToMovie.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
