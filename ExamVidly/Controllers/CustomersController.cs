@@ -28,12 +28,12 @@ namespace ExamVidly.Controllers
         public ActionResult New()
         {
             var membershipType = _context.MenMembershipTypes.ToList();
-            var viewModel = new NewCustomerViewModel()
+            var viewModel = new CustomerFormViewModel()
             {
                 MembershipTypes = membershipType,
             };
 
-            return View(viewModel);
+            return View("CustomerForm",viewModel);
         }
 
         [HttpPost]
@@ -62,6 +62,20 @@ namespace ExamVidly.Controllers
 
             return View(customer);
         }
-      
+
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(m => m.Id == id);
+
+            if (customer == null)
+                return HttpNotFound();
+
+            var viewModel = new CustomerFormViewModel()
+            {
+                Customer = customer,
+                MembershipTypes = _context.MenMembershipTypes.ToList()
+            };
+            return View("CustomerForm", viewModel);
+        }
     }
 }
