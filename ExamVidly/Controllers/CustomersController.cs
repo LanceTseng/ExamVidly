@@ -27,8 +27,13 @@ namespace ExamVidly.Controllers
 
         public ActionResult New()
         {
+            var membershipType = _context.MenMembershipTypes.ToList();
+            var viewModel = new NewCustomerViewModel()
+            {
+                MembershipTypes = membershipType,
+            };
 
-            return View();
+            return View(viewModel);
         }
 
         public ActionResult Index()
