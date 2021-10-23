@@ -55,7 +55,7 @@ namespace ExamVidly.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Customers");
+            return RedirectToAction("Index", "Movies");
 
         }
 
