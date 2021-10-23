@@ -21,7 +21,6 @@ namespace ExamVidly.Controllers
             _context.Dispose();
         }
 
-        // GET: Movie/Index
         public ActionResult Index()
         {
             var movies = _context.Movies.Include(m => m.Genre);

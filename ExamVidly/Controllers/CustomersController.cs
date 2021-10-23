@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using ExamVidly.Models;
 using ExamVidly.ViewModels;
-using Microsoft.Ajax.Utilities;
-using Microsoft.Owin.Security;
 
 namespace ExamVidly.Controllers
 {
@@ -23,6 +18,13 @@ namespace ExamVidly.Controllers
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
+        }
+
+        public ActionResult Index()
+        {
+            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
+
+            return View(customers);
         }
 
         public ActionResult New()
@@ -55,24 +57,6 @@ namespace ExamVidly.Controllers
             return RedirectToAction("Index", "Customers");
         }
 
-        public ActionResult Index()
-        {
-            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
-
-            return View(customers);
-        }
-
-        // GET: Customers/Detail
-        public ActionResult Details(int Id)
-        {
-            var customer = _context.Customers.Include(m => m.MembershipType).FirstOrDefault(m => m.Id == Id);
-
-            if (customer == null)
-                return HttpNotFound();
-
-            return View(customer);
-        }
-
         public ActionResult Edit(int id)
         {
             var customer = _context.Customers.SingleOrDefault(m => m.Id == id);
@@ -86,6 +70,16 @@ namespace ExamVidly.Controllers
                 MembershipTypes = _context.MenMembershipTypes.ToList()
             };
             return View("CustomerForm", viewModel);
+        }
+
+        public ActionResult Details(int Id)
+        {
+            var customer = _context.Customers.Include(m => m.MembershipType).FirstOrDefault(m => m.Id == Id);
+
+            if (customer == null)
+                return HttpNotFound();
+
+            return View(customer);
         }
     }
 }
