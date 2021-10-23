@@ -33,13 +33,23 @@ namespace ExamVidly.Controllers
                 MembershipTypes = membershipType,
             };
 
-            return View("CustomerForm",viewModel);
+            return View("CustomerForm", viewModel);
         }
 
         [HttpPost]
-        public ActionResult Create(Customer customer)
+        public ActionResult Save(Customer customer)
         {
-            _context.Customers.Add(customer);
+            if (customer.Id == 0)
+                _context.Customers.Add(customer);
+            else
+            {
+                var customerInDb = _context.Customers.Single(m => m.Id == customer.Id);
+                customerInDb.Name = customer.Name;
+                customerInDb.BirthDate = customer.BirthDate;
+                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+            }
+
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Customers");
@@ -47,7 +57,7 @@ namespace ExamVidly.Controllers
 
         public ActionResult Index()
         {
-            var customers = _context.Customers.Include(c=>c.MembershipType).ToList();
+            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
 
             return View(customers);
         }
@@ -55,7 +65,7 @@ namespace ExamVidly.Controllers
         // GET: Customers/Detail
         public ActionResult Details(int Id)
         {
-            var customer = _context.Customers.Include(m=>m.MembershipType).FirstOrDefault(m => m.Id == Id);
+            var customer = _context.Customers.Include(m => m.MembershipType).FirstOrDefault(m => m.Id == Id);
 
             if (customer == null)
                 return HttpNotFound();
