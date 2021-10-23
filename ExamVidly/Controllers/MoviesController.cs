@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using ExamVidly.Models;
@@ -56,7 +55,6 @@ namespace ExamVidly.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Movies");
-
         }
 
         public ActionResult Edit(int id)
@@ -86,7 +84,5 @@ namespace ExamVidly.Controllers
 
             return View(movie);
         }
-
-        
     }
 }
