@@ -13,7 +13,7 @@ namespace ExamVidly.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Plaese enter customer's name.")]
         [StringLength(255)]
         public string Name { get; set; }
 
