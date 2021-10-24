@@ -32,6 +32,7 @@ namespace ExamVidly.Controllers
             var membershipType = _context.MenMembershipTypes.ToList();
             var viewModel = new CustomerFormViewModel()
             {
+                Customer =  new Customer(),
                 MembershipTypes = membershipType,
             };
 
