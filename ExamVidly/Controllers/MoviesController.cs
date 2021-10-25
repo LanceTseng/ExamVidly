@@ -32,6 +32,7 @@ namespace ExamVidly.Controllers
             var movieGenreType = _context.Genres.ToList();
             var viewModel = new MovieFormViewModel()
             {
+                Movie = new Movie(),
                 Genres = movieGenreType,
             };
 
@@ -39,6 +40,7 @@ namespace ExamVidly.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
             if (movie.Id == 0)
