@@ -32,7 +32,7 @@ namespace ExamVidly.Models
         [Required]
         [Range(1, 20)]
         [Display(Name = "Number In Stock")]
-        public int NumberInStock { get; set; }
+        public byte NumberInStock { get; set; }
 
     }
 }
