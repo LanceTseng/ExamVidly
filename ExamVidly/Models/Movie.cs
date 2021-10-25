@@ -34,10 +34,5 @@ namespace ExamVidly.Models
         [Display(Name = "Number In Stock")]
         public int NumberInStock { get; set; }
 
-        public Movie()
-        {
-            this.DateAdded = DateTime.Today;
-            this.NumberInStock = 0;
-        }
     }
 }
