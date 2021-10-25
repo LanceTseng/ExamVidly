@@ -23,7 +23,7 @@ namespace ExamVidly.Controllers
 
         public ActionResult Index()
         {
-            var movies = _context.Movies.Include(m => m.Genre);
+            var movies = _context.Movies.Include(m => m.Genre).ToList();
 
             return View(movies);
         }
