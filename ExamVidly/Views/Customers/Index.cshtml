@@ -40,27 +40,27 @@
 						render: function (data) {
 							return "<button class='btn-link js-delete' data-customer-id=" + data + ">Delete</button>";
 						}
-					},
+					}
 				]
 			});
 
-			$("#customers").on("click", ".js-delete",
+			$("#customers").on("click",
+				".js-delete",
 				function () {
 					var button = $(this);
 
 					bootbox.confirm("Are u sure u want to delete this customer?",
-						function (result) {
+						function(result) {
 							if (result) {
 								$.ajax({
 									url: "/api/customers/" + button.attr("data-customer-id"),
 									method: "DELETE",
-									success: function () {
+									success: function() {
 										table.row(button.parents("tr")).remove().draw();
 									}
 								});
 							}
 						});
-					;
 				});
 		});
 	</script>
