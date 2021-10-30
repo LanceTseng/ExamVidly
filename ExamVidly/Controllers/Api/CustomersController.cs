@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
+using System.Data.Entity;
 using AutoMapper;
 using ExamVidly.Dtos;
 using ExamVidly.Models;
@@ -19,17 +20,20 @@ namespace ExamVidly.Controllers.Api
         }
 
         //GET /api/customers
-        [HttpGet]
         public IEnumerable<CustomerDto> GetCustomers()
         {
-            return _context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>);
+            return _context.Customers
+                .Include(c => c.MembershipType)
+                .ToList()
+                .Select(Mapper.Map<Customer, CustomerDto>);
         }
 
         //GET /api/customers/1
         [HttpGet]
         public IHttpActionResult GetCustomers(int id)
         {
-            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            var customer = _context.Customers
+                .SingleOrDefault(c => c.Id == id);
 
             if (customer == null)
                 return NotFound();
