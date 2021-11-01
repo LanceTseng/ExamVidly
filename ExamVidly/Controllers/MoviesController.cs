@@ -7,6 +7,7 @@ using ExamVidly.ViewModels;
 
 namespace ExamVidly.Controllers
 {
+    [Authorize(Roles = RoleName.CanManageMovies)]
     public class MoviesController : Controller
     {
         private ApplicationDbContext _context;
@@ -30,7 +31,6 @@ namespace ExamVidly.Controllers
             return View("ReadOnlyList");
         }
 
-        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var movieGenreType = _context.Genres.ToList();

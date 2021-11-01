@@ -10,6 +10,7 @@ using ExamVidly.Models;
 
 namespace ExamVidly.Controllers.Api
 {
+    [Authorize(Roles = RoleName.CanManageMovies)]
     public class MoviesController : ApiController
     {
         private ApplicationDbContext _context;
