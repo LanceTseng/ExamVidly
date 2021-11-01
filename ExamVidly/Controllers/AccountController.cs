@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ExamVidly.Models;
+using ExamVidly.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -153,10 +155,15 @@ namespace ExamVidly.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email,
+              
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email,
                     DrivingLicense = model.DrivingLicense,
-                    Email = model.Email };
+                    Phone = model.Phone
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
                     #region removed only for creating the admin account
@@ -388,7 +395,8 @@ namespace ExamVidly.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    DrivingLicense = model.DrivingLicense
+                    DrivingLicense = model.DrivingLicense,
+                    Phone = model.Phone
                 };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
