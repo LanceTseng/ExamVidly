@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Caching;
 using System.Runtime.InteropServices;
 using System.Web.Mvc;
 using ExamVidly.Models;
@@ -23,6 +24,13 @@ namespace ExamVidly.Controllers
 
         public ActionResult Index()
         {
+            if (MemoryCache.Default["Genres"]==null)
+            {
+                MemoryCache.Default["Genres"] = _context.Genres.ToList();
+            }
+
+            var genres = MemoryCache.Default["Genres"] as IOrderedEnumerable<Genre>;
+
             return View();
         }
 
