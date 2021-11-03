@@ -24,13 +24,6 @@ namespace ExamVidly.Controllers
 
         public ActionResult Index()
         {
-            if (MemoryCache.Default["Genres"]==null)
-            {
-                MemoryCache.Default["Genres"] = _context.Genres.ToList();
-            }
-
-            var genres = MemoryCache.Default["Genres"] as IOrderedEnumerable<Genre>;
-
             return View();
         }
 
