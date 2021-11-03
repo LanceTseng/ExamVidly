@@ -1,5 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Caching;
+using System.Runtime.InteropServices;
 using System.Web.Mvc;
 using ExamVidly.Models;
 using ExamVidly.ViewModels;
