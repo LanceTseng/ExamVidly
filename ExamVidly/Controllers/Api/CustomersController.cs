@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
-using System.Data.Entity;
 using AutoMapper;
 using ExamVidly.Dtos;
 using ExamVidly.Models;
@@ -20,12 +19,21 @@ namespace ExamVidly.Controllers.Api
         }
 
         //GET /api/customers
-        public IEnumerable<CustomerDto> GetCustomers()
+        public IHttpActionResult GetCustomers(string query = null)
         {
-            return _context.Customers
-                .Include(c => c.MembershipType)
-                .ToList()
-                .Select(Mapper.Map<Customer, CustomerDto>);
+            var customersQuery = _context.Customers
+                .Include(c => c.MembershipType);
+
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                customersQuery = customersQuery.Where(c => c.Name.Contains(query));
+            }
+
+            var customerDtos = customersQuery
+            .ToList()
+            .Select(Mapper.Map<Customer, CustomerDto>);
+
+            return Ok(customerDtos);
         }
 
         //GET /api/customers/1
@@ -54,7 +62,7 @@ namespace ExamVidly.Controllers.Api
 
             customerDto.Id = customer.Id;
 
-            return Created(new Uri(Request.RequestUri + "/"+ customer.Id), customerDto);
+            return Created(new Uri(Request.RequestUri + "/" + customer.Id), customerDto);
         }
 
         // POST /api/customers
