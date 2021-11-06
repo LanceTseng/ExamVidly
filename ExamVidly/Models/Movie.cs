@@ -35,5 +35,8 @@ namespace ExamVidly.Models
         [Display(Name = "Number In Stock")]
         public byte NumberInStock { get; set; }
 
+        [Required]
+        public byte NumberAvailable { get; set; }
+
     }
 }
