@@ -9,7 +9,7 @@ namespace ExamVidly.Dtos
     {
         public int CustomerId { get; set; }
 
-        private List<int> MovieIds { get; set; }
+        public List<int> MovieIds { get; set; }
 
     }
 }
