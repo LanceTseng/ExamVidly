@@ -1,6 +1,6 @@
-﻿.typeahead {
-	background-color: #fff;
-}
+﻿﻿.typeahead {
+	 background-color: #fff;
+ }
 
 .typeahead:focus {
 	border: 2px solid #0097cf;
@@ -51,4 +51,8 @@
 
 .tt-suggestion p {
 	margin: 0;
+}
+
+tt-container {
+	position: relative
 }
