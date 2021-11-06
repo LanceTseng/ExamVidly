@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
 	ViewBag.Title = "New Rental Form";
 }
 
@@ -12,9 +11,10 @@
 	</div>
 	<div class="form-group">
 		<label>Movie</label>
-		<input type="text" value="" class="form-control" />
-	</div>	
+		<input id="movie" type="text" value="" class="form-control" />
+	</div>
 
+	@*<ul id="movies" class="list-group"></ul>*@
 	<button class="btn btn-primary">Summit</button>
 </form>
 
@@ -23,7 +23,6 @@
 	<script>
 		$(document).ready(function () {
 			var vm = {};
-
 			var customers = new Bloodhound({
 				datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
 				queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -34,15 +33,35 @@
 			});
 
 			$('#customer').typeahead({
-					minLength: 3,
-					highlight: true
-				},
+				minLength: 3,
+				highlight: true
+			},
 				{
 					name: 'customers',
 					display: 'name',
 					source: customers
-				}).on("typeahead:select", function(e, customer) {
-				vm.customerId = customer.id;
+				}).on("typeahead:select", function (e, customer) {
+					vm.customerId = customer.id;
+				});
+
+			var movies = new Bloodhound({
+				datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+				queryTokenizer: Bloodhound.tokenizers.whitespace,
+				remote: {
+					url: '/api/movies?query=%QUERY',
+					wildcard: '%QUERY'
+				}
+			});
+
+			$('#movie').typeahead({
+					minLength: 3,
+					highlight: true
+				},
+				{
+					name: 'movies',
+					display: 'name',
+					source: movies
+				}).on("typeahead:select", function (e, movie) {
 			});
 		});
 	</script>
