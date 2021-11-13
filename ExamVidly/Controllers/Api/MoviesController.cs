@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Data.Entity;
 using System.Web.Http;
 using AutoMapper;
 using ExamVidly.Dtos;
@@ -21,12 +20,20 @@ namespace ExamVidly.Controllers.Api
         }
 
         [HttpGet]
-        public IEnumerable<MovieDto> GetMovies()
+        public IHttpActionResult GetMovies(string query = null)
         {
-            return _context.Movies
-                .Include(m=>m.Genre)
+            var movieQuery = _context.Movies
+                .Include(m => m.Genre);
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                movieQuery = movieQuery.Where(m => m.Name.Contains(query));
+            }
+
+            var movieDtos = movieQuery
                 .ToList()
                 .Select(Mapper.Map<Movie, MovieDto>);
+
+            return Ok(movieDtos);
         }
 
         [HttpGet]

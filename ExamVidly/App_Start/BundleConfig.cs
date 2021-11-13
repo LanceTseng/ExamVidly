@@ -14,7 +14,9 @@ namespace ExamVidly
                         "~/Scripts/bootbox.js",
                         "~/Scripts/respond.js",
                         "~/Scripts/datatables/jquery.datatables.js",
-                        "~/Scripts/datatables/datatables.bootstrap.js"
+                        "~/Scripts/datatables/datatables.bootstrap.js",
+                        "~/Scripts/typeahead.bundle.js",
+                        "~/Scripts/toastr.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -28,7 +30,10 @@ namespace ExamVidly
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-lumen.css",
                       "~/Content/datables/css/datatables.bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/typeahead.css",
+                      "~/Content/toastr.css",
+                      "~/Content/site.css"
+                      ));
         }
     }
 }
